@@ -1,16 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
   const buttons = Array.from(document.querySelectorAll('.img-button'));
+  const choppingBoard = document.getElementById('choppingBoard');
+  
   if (!buttons.length) return;
 
-  // toggle clicked button; stop propagation so document click doesn't immediately close it
   buttons.forEach((btn) => {
     btn.addEventListener('click', (e) => {
-      // optionally close others when one opens:
-      buttons.forEach(b => { if (b !== btn) { b.classList.remove('is-active'); b.setAttribute('aria-pressed', 'false'); } });
+      // close others when one opens
+      buttons.forEach(b => { 
+        if (b !== btn) { 
+          b.classList.remove('is-active'); 
+          b.setAttribute('aria-pressed', 'false'); 
+        } 
+      });
 
       const expanded = btn.classList.toggle('is-active');
       btn.setAttribute('aria-pressed', String(expanded));
       e.stopPropagation();
+
+      // add food image to chopping board when clicked
+      if (expanded) {
+        const img = btn.querySelector('img');
+        const foodClone = img.cloneNode();
+        foodClone.classList.add('chopping-board-item');
+        choppingBoard.appendChild(foodClone);
+      }
     });
   });
 
@@ -23,7 +37,5 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
- 
 });
 

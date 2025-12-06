@@ -86,4 +86,29 @@ body {
   background-size: cover, cover;    /* both images scaled the same way */
   background-repeat: no-repeat, no-repeat;
   background-attachment: fixed, fixed;
-  }
+}
+
+/* chopping board container */
+.chopping-board {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 120px;
+  background: rgba(200, 160, 120, 0.9);
+  border: 3px solid #8b6f47;
+  border-radius: 12px;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  overflow-x: auto;
+}
+
+/* food items on chopping board */
+.chopping-board-item {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
