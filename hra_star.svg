@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 339.97 326.49">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #ffe9b7;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #f7c946;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 13px;
+      }
+
+      .cls-2 {
+        stroke: #dab420;
+      }
+    </style>
+  </defs>
+  <polygon class="cls-2" points="165.57 6.5 203.12 122.07 324.64 122.07 226.33 193.5 263.88 309.07 165.57 237.65 67.26 309.07 104.81 193.5 6.5 122.07 128.02 122.07 165.57 6.5"/>
+  <polygon class="cls-1" points="174.4 17.42 211.95 132.99 333.47 132.99 235.16 204.42 272.71 319.99 174.4 248.56 76.08 319.99 113.64 204.42 15.32 132.99 136.84 132.99 174.4 17.42"/>
+</svg>

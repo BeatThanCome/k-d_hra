@@ -1,16 +1,17 @@
 :root {
-  --base-size: 250px;    /* adjust base size */
-  --scale: 1.18;         /* expanded scale */
   --duration: 420ms;     /* slower, smooth expansion */
 }
 
 html,body { height:100%; margin:0; }
 body { display:flex; align-items:center; justify-content:center; font-family:system-ui,Segoe UI,Roboto,Arial; background:#111; }
 
-.stage { padding:40px; }
+.stage { padding:40px; position: relative; z-index: 1; }
 
 /* button wrapper — looks like image only, no frame */
 .img-button {
+  width: 10vw;
+  position: absolute;
+  z-index: 2;             /* if your buttons are absolutely positioned, give them a positive z-index */
   border: none;
   padding: 0;
   background: transparent;
@@ -24,11 +25,8 @@ body { display:flex; align-items:center; justify-content:center; font-family:sys
 
 /* keep same visual behaviour for both images */
 .img-button img {
+  width: 10vh;
   display:block;
-  width: var(--base-size);
-  height: auto;
-  transform-origin: 50% 50%;
-  transition: transform var(--duration) cubic-bezier(.2, .9, .2, 1);
   will-change: transform;
   user-select: none;
   pointer-events: auto;
@@ -37,28 +35,6 @@ body { display:flex; align-items:center; justify-content:center; font-family:sys
   border: none;
 }
 
-/* expanded state — smooth scale */
-.img-button.is-active img {
-  transform: scale(var(--scale));
-}
-
-/* per-image positioning (adjust to taste) */
-#hraMasoBtn {
-  position: relative;
-  top: 78px;
-  left: -950px;
-}
-
-#hraZeleninaBtn {
-  position: relative;
-  top: -210px;   /* moved up 100px from 78px */
-  left: -1210px; /* moved left 100px from -940px */
-}
-
-#hraZeleninaBtn img {
-  /* make hra_zelenina 25% bigger than the base size */
-  width: calc(var(--base-size) * 1.5);
-}
 
 /* ensure no focus ring or frame when focused or active */
 .img-button:focus,
@@ -78,31 +54,40 @@ body {
   align-items: center;
   justify-content: center;
   font-family: system-ui, "Segoe UI", Roboto, Arial;
-  background-color: #111;
-
-  /* top layer (hra_kuchyně) then background (hra_background) */
-  background-image: url('hra_kuchyně.png'), url('hra_background.png');
-  background-position: center center, center center;
-  background-size: cover, cover;    /* both images scaled the same way */
-  background-repeat: no-repeat, no-repeat;
-  background-attachment: fixed, fixed;
+  background-color: #111; /* keep fallback color */
+  /* removed CSS background-image layers — now handled by .bg-container */
 }
+
+/* background container using images in HTML; stays behind content */
+.bg-container {
+  position: fixed;
+  inset: 0;               /* top:0; right:0; bottom:0; left:0; */
+  z-index: -1;            /* behind page content */
+  pointer-events: none;   /* clicks pass through background images */
+  overflow: hidden;
+}
+
+/* both images fill the viewport and keep aspect with cover */
+.bg-container img {
+  z-index: -1;  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ensure hra_kuchyně (foreground background) sits above hra_background */
+.bg-top { z-index: 1; }
+.bg-back { z-index: 0; }
 
 /* chopping board container */
 .chopping-board {
   position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 400px;
-  height: 120px;
-  background: rgba(200, 160, 120, 0.9);
-  border: 3px solid #8b6f47;
-  border-radius: 12px;
-  display: flex;
-  gap: 10px;
-  padding: 10px;
-  overflow-x: auto;
+  background: transparent;;
+  border: none;
+  width: 40%;
 }
 
 /* food items on chopping board */
@@ -111,4 +96,10 @@ body {
   width: auto;
   object-fit: contain;
   flex-shrink: 0;
+}
+
+.choppingBoardImg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
