@@ -1,0 +1,89 @@
+:root {
+  --base-size: 250px;    /* adjust base size */
+  --scale: 1.18;         /* expanded scale */
+  --duration: 420ms;     /* slower, smooth expansion */
+}
+
+html,body { height:100%; margin:0; }
+body { display:flex; align-items:center; justify-content:center; font-family:system-ui,Segoe UI,Roboto,Arial; background:#111; }
+
+.stage { padding:40px; }
+
+/* button wrapper — looks like image only, no frame */
+.img-button {
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  display:inline-block;
+  line-height:0;
+
+  outline: none; /* remove default outline */
+  /* no per-button offsets here anymore — handled per-id below */
+}
+
+/* keep same visual behaviour for both images */
+.img-button img {
+  display:block;
+  width: var(--base-size);
+  height: auto;
+  transform-origin: 50% 50%;
+  transition: transform var(--duration) cubic-bezier(.2, .9, .2, 1);
+  will-change: transform;
+  user-select: none;
+  pointer-events: auto;
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+/* expanded state — smooth scale */
+.img-button.is-active img {
+  transform: scale(var(--scale));
+}
+
+/* per-image positioning (adjust to taste) */
+#hraMasoBtn {
+  position: relative;
+  top: 78px;
+  left: -950px;
+}
+
+#hraZeleninaBtn {
+  position: relative;
+  top: -210px;   /* moved up 100px from 78px */
+  left: -1210px; /* moved left 100px from -940px */
+}
+
+#hraZeleninaBtn img {
+  /* make hra_zelenina 25% bigger than the base size */
+  width: calc(var(--base-size) * 1.5);
+}
+
+/* ensure no focus ring or frame when focused or active */
+.img-button:focus,
+.img-button:focus-visible,
+.img-button.is-active,
+.img-button.is-active:focus,
+.img-button.is-active:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, "Segoe UI", Roboto, Arial;
+  background-color: #111;
+
+  /* top layer (hra_kuchyně) then background (hra_background) */
+  background-image: url('hra_kuchyně.png'), url('hra_background.png');
+  background-position: center center, center center;
+  background-size: cover, cover;    /* both images scaled the same way */
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+  }
