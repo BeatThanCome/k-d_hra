@@ -1,105 +1,84 @@
-:root {
-  --duration: 420ms;     /* slower, smooth expansion */
+#content{
+  background-image: url('hra_background.svg');
+  background-repeat: no-repeat;
+  background-size: cover; /* or contain */
+  position: relative;
 }
 
-html,body { height:100%; margin:0; }
-body { display:flex; align-items:center; justify-content:center; font-family:system-ui,Segoe UI,Roboto,Arial; background:#111; }
+#kitchen{
 
-.stage { padding:40px; position: relative; z-index: 1; }
+}
 
-/* button wrapper — looks like image only, no frame */
-.img-button {
-  width: 10vw;
+#chopping-board{
   position: absolute;
-  z-index: 2;             /* if your buttons are absolutely positioned, give them a positive z-index */
-  border: none;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
-  display:inline-block;
-  line-height:0;
-
-  outline: none; /* remove default outline */
-  /* no per-button offsets here anymore — handled per-id below */
+  top: 70%;
+  width: 55%;
+  height: 25%;
+  left: 13%;
+  background-image: url('hra_chopping-board.svg');
+  background-repeat: no-repeat;
+  background-size: cover; /* or contain */
 }
-
-/* keep same visual behaviour for both images */
-.img-button img {
-  width: 10vh;
-  display:block;
-  will-change: transform;
-  user-select: none;
-  pointer-events: auto;
-  outline: none;
-  box-shadow: none;
-  border: none;
+#chopping-area{
+  position: relative;
+  top: 25%;
+  left: 45%;
+  width: 50%;
+  height: 55%;
 }
 
 
-/* ensure no focus ring or frame when focused or active */
-.img-button:focus,
-.img-button:focus-visible,
-.img-button.is-active,
-.img-button.is-active:focus,
-.img-button.is-active:focus-visible {
-  outline: none;
-  box-shadow: none;
-  border: none;
+#plate{
+  position: absolute;
+  top: 65%;
+  width: 30%;
+  height: 25%;
+  left: 70%;
+  background-image: url('hra_plate.svg');
+  background-repeat: no-repeat;
+  background-size: cover; /* or contain */
 }
 
-body {
-  min-height: 100vh;
-  margin: 0;
+
+#item-shelve {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: system-ui, "Segoe UI", Roboto, Arial;
-  background-color: #111; /* keep fallback color */
-  /* removed CSS background-image layers — now handled by .bg-container */
-}
-
-/* background container using images in HTML; stays behind content */
-.bg-container {
-  position: fixed;
-  inset: 0;               /* top:0; right:0; bottom:0; left:0; */
-  z-index: -1;            /* behind page content */
-  pointer-events: none;   /* clicks pass through background images */
-  overflow: hidden;
-}
-
-/* both images fill the viewport and keep aspect with cover */
-.bg-container img {
-  z-index: -1;  
+  flex-direction: column;
+  gap: 1%;
+  margin: 1.5% 0 0 1.5%;
+  width: 13%;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  object-fit: cover;
-  display: block;
+  height: 95%; /* so the flex container fills parent height */
+}
+.food-item{
+ margin-top: 14%;
+}
+.food-item.enlarged {
+  transform: scale(1.5); /* enlarge 1.5x */
+  transition: transform 0.3s ease;
+  z-index: 10; /* so it appears above other elements */
+}
+#item-shelve .food-item:last-child {
+  margin-top: auto;
 }
 
-/* ensure hra_kuchyně (foreground background) sits above hra_background */
-.bg-top { z-index: 1; }
-.bg-back { z-index: 0; }
-
-/* chopping board container */
-.chopping-board {
-  position: fixed;
-  background: transparent;;
-  border: none;
-  width: 40%;
-}
-
-/* food items on chopping board */
-.chopping-board-item {
-  height: 100px;
-  width: auto;
+#chopping-board img {
+  position: absolute;   /* allow free placement */
   object-fit: contain;
-  flex-shrink: 0;
+}
+@keyframes shake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-2px, -2px) rotate(-2deg); }
+  20% { transform: translate(2px, 2px) rotate(2deg); }
+  30% { transform: translate(-2px, 2px) rotate(-2deg); }
+  40% { transform: translate(2px, -2px) rotate(2deg); }
+  50% { transform: translate(-1px, 1px) rotate(-1deg); }
+  60% { transform: translate(1px, -1px) rotate(1deg); }
+  70% { transform: translate(-1px, 1px) rotate(-1deg); }
+  80% { transform: translate(1px, -1px) rotate(1deg); }
+  90% { transform: translate(-1px, 1px) rotate(-1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
 }
 
-.choppingBoardImg {
-  width: 100%;
-  height: auto;
-  display: block;
+#chopping-board.shake {
+  animation: shake 0.5s ease;
 }
