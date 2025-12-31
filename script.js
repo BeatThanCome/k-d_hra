@@ -1,38 +1,80 @@
-const foodItems = document.querySelectorAll('#item-shelve .food-item');
+const items = document.querySelectorAll('#item-shelve .item.food');
 const choppingArea = document.getElementById('chopping-area');
 const choppingBoard = document.getElementById('chopping-board');
-const plate = document.getElementById('plate');
+const plate = document.getElementById('plate-area');
+const speechText = document.getElementById('speech-text');
+const tooltip = document.getElementById('tooltip');
 
 let clickCount = 0; // Track chopping board clicks
 
+const foodNames = ['Maso', 'Zelenina', 'Ryba', 'Ovoce', 'Chleb'];
 
-for (let item of foodItems) {
-  item.addEventListener('click', () => {
+// Populate tooltip with 3 random food images on page load
+document.addEventListener('DOMContentLoaded', function() {
+  const foodItems = Array.from(document.querySelectorAll('#item-shelve .item.food'));
+  
+  // Shuffle and get 3 random food items
+  const shuffled = foodItems.sort(() => Math.random() - 0.5);
+  const selectedFoods = shuffled.slice(0, 3);
+  
+  // Insert cloned images into tooltip
+  selectedFoods.forEach(food => {
+    const clone = food.cloneNode(true);
+    clone.style.height = '79%';
+    clone.style.margin = '1%';
+    tooltip.appendChild(clone);
+  });
+});
+
+function updateSpeechBubble() {
+  // Random number 1-3 for how many items to order
+  const numItems = Math.floor(Math.random() * 3) + 1;
+  const orderedFoods = [];
+  
+  // Randomly select up to 3 different foods
+  const foodSet = new Set();
+  while (foodSet.size < numItems) {
+    const randomFood = foodNames[Math.floor(Math.random() * foodNames.length)];
+    foodSet.add(randomFood);
+  }
+  
+  const message = Array.from(foodSet).join(', ') + '!';
+  speechText.textContent = message;
+}
+
+
+
+function handleFoodClick(event) {
     // 1. Enlarge clicked item briefly
-    item.classList.add('enlarged');
-    setTimeout(() => item.classList.remove('enlarged'), 300);
-
+    enlarge(event);
     // 2. Create a new img element
     const newImg = document.createElement('img');
-    newImg.src = item.src;
-    newImg.alt = item.alt;
-    newImg.style.height = '80%';
-    newImg.style.position = 'absolute';
+    newImg.src = event.src;
+    newImg.alt = event.alt;
+    const randomTop = Math.random() *100 -70; // 20% to 100%
+    const randomLeft = Math.random() *100  -20; // 20% to 100%
 
-    // 3. Pick a random position in % (0-100)
-    const maxXPercent = 100 - 20; // width % of image
-    const maxYPercent = 100 - 80; // height % of image
+    newImg.style.top = randomTop + '%';
+    newImg.style.left = randomLeft + '%';
 
-    const randomX = Math.random() * maxXPercent;
-    const randomY = Math.random() * maxYPercent;
-
-    newImg.style.left = `${randomX}%`;
-    newImg.style.top = `${randomY}%`;
-
-    // 4. Append to chopping board
     choppingArea.appendChild(newImg);
-  });
-}
+    // 3. Update speech bubble with random food
+    updateSpeechBubble();
+  }
+  function handleBinClick(event) {
+    // 1. Enlarge clicked item briefly
+    enlarge(event);
+    // 2. remove all appended items in chopping area and plate
+    const itemsInChoppingArea = choppingArea.querySelectorAll('img');
+    itemsInChoppingArea.forEach(img => img.remove());
+    const itemsInPlate = plate.querySelectorAll('img');
+    itemsInPlate.forEach(img => img.remove());
+  }
+
+  function enlarge(event) {
+    event.classList.add('enlarged');
+    setTimeout(() => event.classList.remove('enlarged'), 300);
+  }
 
 choppingBoard.addEventListener('click', () => {
   choppingBoard.classList.add('shake');
@@ -40,18 +82,23 @@ choppingBoard.addEventListener('click', () => {
   clickCount++;
 
   // 3. If clicked 10 times, move items to plate
-  if (clickCount >= 10) {
-    const items = choppingArea.querySelectorAll('img'); // all food items in chopping area
+  if (clickCount >= 2) {
+    // Move items to plate
+    const items = choppingArea.querySelectorAll('img');
     items.forEach(img => {
-      // Reset positioning so items fit in plate
-      img.style.position = 'absolute';
-      img.style.left = `${Math.random() * 70}%`;  // random X inside plate
-      img.style.top = `${Math.random() * 70}%`;   // random Y inside plate
-      img.style.width = '30%';                     // scale down for plate
-      img.style.height = '30%';
-      plate.appendChild(img);                      // move item
-    });
+      const newImg = document.createElement('img');
+      newImg.src = img.src;
+      newImg.alt = img.alt;
+      plate.appendChild(newImg);
+            const randomTop = Math.random() *40; // 20% to 100%
+      const randomLeft = Math.random() *80; // 20% to 100%
 
+      newImg.style.top = randomTop + '%';
+      newImg.style.left = randomLeft + '%';
+
+      img.remove(); // remove from chopping area
+
+    })
     clickCount = 0; // reset counter if you want
   }
 });

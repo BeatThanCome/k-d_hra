@@ -8,11 +8,23 @@
 </head>
 <body>
  <div id="content">
-      <div id="item-shelve">
-      <img src="hra_maso.svg" class="food-item" alt="hra maso" id="hraMasoImg">
-      <img src="hra_zelenina.svg" class="food-item" alt="hra zelenina" id="hraZeleninaImg">
-      <img src="hra_zelenina.svg" class="food-item" alt="hra zelenina" id="hraZeleninaImg">
-      <img src="hra_trash-can.svg" class="food-item" alt="hra zelenina" id="hraZeleninaImg">
+    <img src="hra_VYDRA.svg" id="animal" alt="vydra"  >
+
+    <div class="tooltip" style="height: 15%;" id="tooltip"></div>
+
+    <img src="hra_kuchyně.svg" id="kitchen" alt="Kitchen foreground"  > 
+
+    <div id="item-shelve">
+      <img src="hra_maso.svg" onclick="handleFoodClick(this)" class="item food" alt="hra maso" id="hraMasoImg">
+      <img src="hra_zelenina.svg" onclick="handleFoodClick(this)" class="item food" alt="hra zelenina" id="hraZeleninaImg">
+      <img src="hra_zelenina.svg" onclick="handleFoodClick(this)" class="item food" alt="hra zelenina" id="hraZeleninaImg">
+      <div class="stars">
+        <img src="hra_star.svg" onclick="handleFoodClick(this)" class="star" alt="star" id="star">
+        <img src="hra_star.svg" onclick="handleFoodClick(this)" class="star" alt="star" id="star">
+        <img src="hra_star.svg" onclick="handleFoodClick(this)" class="star" alt="star" id="star">
+
+      </div>
+      <img src="hra_trash-can.svg" onclick="handleBinClick(this)" class="item" alt="trash can" id="trash can">
     </div>    
     <div id="chopping-board">
       <div id="chopping-area">
@@ -20,9 +32,12 @@
       </div>
     </div>    
     <div id="plate">
+      <div id="plate-area">
+
+      </div>
+
     </div>
 
-    <img src="hra_kuchyně.svg" id="kitchen" alt="Kitchen foreground"  > 
 
 
  </div>

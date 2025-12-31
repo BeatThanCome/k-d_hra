@@ -3,18 +3,77 @@
   background-repeat: no-repeat;
   background-size: cover; /* or contain */
   position: relative;
+  height: 55.3vw;;
+}
+/* all child of content abs */
+#content > * {
+  position: absolute !important;
+  height: inherit;
+}
+
+#animal{
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  height: 30%;
+}
+
+/* HTML: <div class="tooltip">This is the same as #13 but with more control over the tail</div> */
+
+.tooltip {
+  
+  --b: 2em; /* base */
+  --h: 20%; /* height */
+
+  --p: 34%;  /* main position (0%:left 100%:right) */
+  --x: -2em; /* tail position (relative to the main position). Can be percentage */
+  --r: 1.2em; /* the radius */
+
+  top:10%;
+
+  --_e: max(0%,-1*var(--x) - var(--p),var(--x) + var(--p) - 100%);
+  padding: 1em;
+  border-radius: var(--r) var(--r) min(var(--r),100% - var(--p) - var(--b)/2) min(var(--r),var(--p) - var(--b)/2)/var(--r);
+  background: 50% 0/calc(100% + 2*var(--_e)) calc(100% + var(--h)) 
+    linear-gradient(60deg,#CC333F,#4ECDC4); /* the gradient */
+  position: relative;
+  z-index: 10;
+  color: #fff;
+  font-size: 18px;
+  width: 30%;
+  left: 60%;
+  text-align: center;
+}
+.tooltip:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 calc(-1*var(--_e)) calc(-1*var(--h));
+  padding-inline: var(--_e);
+  background-image: inherit;
+  clip-path: polygon(50% 50%,
+    clamp(var(--b),var(--p) + var(--b)/2,100%) calc(100% - var(--h)),
+    calc(var(--p) + var(--x)) 100%,
+    clamp(0%,var(--p) - var(--b)/2,100% - var(--b)) calc(100% - var(--h))) content-box;
+}
+
+#speech-text {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
 }
 
 #kitchen{
-
+   height: auto;
 }
 
 #chopping-board{
-  position: absolute;
   top: 70%;
   width: 55%;
   height: 25%;
-  left: 13%;
+  left: 10%;
   background-image: url('hra_chopping-board.svg');
   background-repeat: no-repeat;
   background-size: cover; /* or contain */
@@ -26,19 +85,34 @@
   width: 50%;
   height: 55%;
 }
+#chopping-area img {
+  position: absolute;   /* allow free placement */
+  object-fit: contain;
+  height: 80%;
 
-
-#plate{
-  position: absolute;
-  top: 65%;
-  width: 30%;
-  height: 25%;
-  left: 70%;
-  background-image: url('hra_plate.svg');
-  background-repeat: no-repeat;
-  background-size: cover; /* or contain */
 }
 
+#plate{
+  top: 61%;
+  width: 38%;
+  height: 35%;
+  left: 64%;
+  background-image: url(hra_plate.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#plate-area{
+    position: relative;
+    width: 71%;
+    height: 65%;
+    top: 27%;
+    left: 6%;
+}
+#plate-area img {
+  position: absolute;   /* allow free placement */
+  object-fit: contain;
+  height: 60%;
+}
 
 #item-shelve {
   display: flex;
@@ -46,19 +120,32 @@
   gap: 1%;
   margin: 1.5% 0 0 1.5%;
   width: 13%;
-  position: absolute;
   height: 95%; /* so the flex container fills parent height */
 }
-.food-item{
+
+.item{
  margin-top: 14%;
 }
-.food-item.enlarged {
+.item.enlarged {
   transform: scale(1.5); /* enlarge 1.5x */
   transition: transform 0.3s ease;
   z-index: 10; /* so it appears above other elements */
 }
-#item-shelve .food-item:last-child {
+#item-shelve .item:last-child {
   margin-top: auto;
+  width: 111%;
+}
+
+.stars {
+  top: 2%;
+  left: 20%;
+  position: relative;
+  height: 5.4%;
+  width: 70%;
+}
+.stars > * {
+  width: 29%;
+  
 }
 
 #chopping-board img {
