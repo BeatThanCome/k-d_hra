@@ -136,6 +136,11 @@
   width: 111%;
 }
 
+.food {
+  width: 95%;
+  cursor: pointer;
+}
+
 .stars {
   top: 2%;
   left: 20%;
@@ -146,6 +151,9 @@
 .stars > * {
   width: 29%;
   
+}
+.transparent {
+  opacity: 0.5;
 }
 
 #chopping-board img {
