@@ -1,3 +1,14 @@
+html{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #content{
   background-image: url('hra_background.svg');
   background-repeat: no-repeat;
@@ -18,53 +29,37 @@
   height: 30%;
 }
 
-/* HTML: <div class="tooltip">This is the same as #13 but with more control over the tail</div> */
 
 .tooltip {
+    background-image: url(hra_bublina.svg);
+    background-repeat: no-repeat;
+    left: 26%;
+    transform: scale(0.3);
+    width: 100%;
+    top: -28%;
+    display: flex;
+    justify-content: space-between;
+}
+.tooltip > :first-child {
+    margin-left: 12%;
   
-  --b: 2em; /* base */
-  --h: 20%; /* height */
+}
+.tooltip > :last-child {
+    margin-right: 29%;
+  
+}
 
-  --p: 34%;  /* main position (0%:left 100%:right) */
-  --x: -2em; /* tail position (relative to the main position). Can be percentage */
-  --r: 1.2em; /* the radius */
 
-  top:10%;
-
-  --_e: max(0%,-1*var(--x) - var(--p),var(--x) + var(--p) - 100%);
-  padding: 1em;
-  border-radius: var(--r) var(--r) min(var(--r),100% - var(--p) - var(--b)/2) min(var(--r),var(--p) - var(--b)/2)/var(--r);
-  background: 50% 0/calc(100% + 2*var(--_e)) calc(100% + var(--h)) 
-    linear-gradient(60deg,#CC333F,#4ECDC4); /* the gradient */
+.tooltip img {
+  bottom: 7%;
+  width: 20%;
+  margin : 1%;
   position: relative;
-  z-index: 10;
-  color: #fff;
-  font-size: 18px;
-  width: 30%;
-  left: 60%;
-  text-align: center;
 }
-.tooltip:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0 calc(-1*var(--_e)) calc(-1*var(--h));
-  padding-inline: var(--_e);
-  background-image: inherit;
-  clip-path: polygon(50% 50%,
-    clamp(var(--b),var(--p) + var(--b)/2,100%) calc(100% - var(--h)),
-    calc(var(--p) + var(--x)) 100%,
-    clamp(0%,var(--p) - var(--b)/2,100% - var(--b)) calc(100% - var(--h))) content-box;
+#menu{
+  height: auto;
+  transition: all 0.3s ease-in;
 }
-
-#speech-text {
-  margin: 0;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-}
-
 #kitchen{
    height: auto;
 }
@@ -86,7 +81,7 @@
   height: 55%;
 }
 #chopping-area img {
-  position: absolute;   /* allow free placement */
+  position: absolute;/* allow free placement */
   object-fit: contain;
   height: 80%;
 
@@ -101,6 +96,14 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#start{
+    left: 43%;
+    height: 10%;
+    width: 28%;
+    top: 26%;
+}
+
 #plate-area{
     position: relative;
     width: 71%;
@@ -147,6 +150,8 @@
   position: relative;
   height: 5.4%;
   width: 70%;
+  display: flex;
+  justify-content: space-between;
 }
 .stars > * {
   width: 29%;
@@ -177,3 +182,4 @@
 #chopping-board.shake {
   animation: shake 0.5s ease;
 }
+

@@ -3,6 +3,9 @@ const choppingArea = document.getElementById('chopping-area');
 const choppingBoard = document.getElementById('chopping-board');
 const plate = document.getElementById('plate-area');
 const tooltip = document.getElementById('tooltip');
+const menu = document.getElementById('menu');
+
+
 
 let clickCount = 0; // Track chopping board clicks
 
@@ -10,23 +13,14 @@ const foodNames = ['Maso', 'Zelenina', 'Ryba', 'Ovoce', 'Chleb'];
 
 // Populate tooltip with 3 random food images on page load
 document.addEventListener('DOMContentLoaded', function() {
-  const foodItems = Array.from(document.querySelectorAll('#item-shelve .item.food'));
   const foodMap = {
-    'Maso': null,
-    'Ryba': null,
-    'Zelenina': null,
-    'Ovoce': null,
-    'Chleb': null
+    'Maso': 'hra_maso.svg',
+    'Ryba': 'hra_ryba.svg',
+    'Zelenina': 'hra_zelenina.svg'
+
   };
   
-  // Map food items by type
-  foodItems.forEach(item => {
-    if (item.id.includes('Maso')) foodMap['Maso'] = item;
-    else if (item.id.includes('ryba')) foodMap['Ryba'] = item;
-    else if (item.id.includes('Zelenina')) foodMap['Zelenina'] = item;
-    else if (item.id.includes('ovoce')) foodMap['Ovoce'] = item;
-    else if (item.id.includes('chleb')) foodMap['Chleb'] = item;
-  });
+
   
   // Generate 3 random foods (can be duplicates)
   for (let i = 0; i < 3; i++) {
@@ -34,16 +28,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const foodElement = foodMap[randomFoodType];
     
     if (foodElement) {
-      const clone = foodElement.cloneNode(true);
-      clone.style.height = '79%';
-      clone.style.margin = '1%';
-      clone.id = randomFoodType;
-      tooltip.appendChild(clone);
+      const img = document.createElement('img');
+      img.src = foodElement;
+      img.alt = randomFoodType;
+      img.id = randomFoodType;
+      tooltip.appendChild(img);
     }
+
   }
 });
 
+function moveOffScreen(element) {
+  menu.style.transform = '1s ease-in-out '; 
+  menu.style.transform = 'translateY(-60%)'
 
+  element.style.display = 'none'; 
+}
 
 function handleFoodClick(event) {
     // 1. Enlarge clicked item briefly
@@ -208,8 +208,8 @@ function resetOrderAndAnimal() {
     
     if (foodElement) {
       const clone = foodElement.cloneNode(true);
-      clone.style.height = '79%';
       clone.style.margin = '1%';
+      clone.style.width = 'auto';   
       clone.id = randomFoodType;
       tooltip.appendChild(clone);
     }
