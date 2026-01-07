@@ -229,5 +229,3 @@ function resetOrderAndAnimal() {
   animal.src = animalMap[randomAnimal];
 } 
 
-
-

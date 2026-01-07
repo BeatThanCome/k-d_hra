@@ -115,6 +115,11 @@ body{
   position: absolute;   /* allow free placement */
   object-fit: contain;
 }
+.hide{
+  display: none;
+}
+
+
 
 #item-shelve {
   display: flex;
