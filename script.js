@@ -5,6 +5,7 @@ const plate = document.getElementById('plate-area');
 const tooltip = document.getElementById('tooltip');
 const menu = document.getElementById('menu');
 const animal = document.getElementById('animal');
+var numberOfStars = 3;
 
 
 let clickCount = 0; // Track chopping board clicks
@@ -161,6 +162,7 @@ function handlePlateClick(element) {
   } else {
     alert('Incorrect meal. Please try again.');
     rankDown()
+
   }
 
 
@@ -185,7 +187,15 @@ function rankDown() {
   const stars = document.querySelectorAll('.star:not(.transparent)');
   // add one transparent class to last star found
   if (stars.length > 0) {
+  
     stars[stars.length - 1].classList.add('transparent');
+
+if (stars.length - 1 === 0) {
+      // Show lost screen
+      const lostScreen = document.getElementById('hra_lost_screen');
+      lostScreen.classList.remove('close');
+
+
   }
 }
 
