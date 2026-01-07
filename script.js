@@ -7,13 +7,13 @@ const menu = document.getElementById('menu');
 const animal = document.getElementById('animal');
 var numberOfStars = 3;
 
-var timeLeft = 20;
+var timeLeft = 40;
 let timerInterval;
 
 
 let clickCount = 0; // Track chopping board clicks
 
-const foodNames = ['Maso', 'Zelenina', 'Ryba', 'Ovoce', 'Chleb'];
+const foodNames = ['Maso', 'Zelenina', 'Ryba'];
 
 // Populate tooltip with 3 random food images on page load
 document.addEventListener('DOMContentLoaded', function () {
@@ -192,7 +192,7 @@ function clearFood() {
 function rankUp() {
   const stars = document.querySelectorAll('.star.transparent');
   // remove one transparent class from first star found
-      timeLeft = timeLeft + 3;
+      timeLeft = timeLeft + 5;
 
       console.log('Time added! New time:', timeLeft);
     document.getElementById('timer').textContent = timeLeft;
@@ -273,12 +273,10 @@ function newOrder() {
     if (item.id.includes('Maso')) foodMap['Maso'] = item;
     else if (item.id.includes('ryba')) foodMap['Ryba'] = item;
     else if (item.id.includes('Zelenina')) foodMap['Zelenina'] = item;
-    else if (item.id.includes('ovoce')) foodMap['Ovoce'] = item;
-    else if (item.id.includes('chleb')) foodMap['Chleb'] = item;
   });
-
+  const random = Math.floor(Math.random() * 3) + 1;
   // Generate 3 random foods (can be duplicates)
-  for (let i = 1; i < 3; i++) {
+  for (let i = 0; i < random; i++) {
     const randomFoodType = foodNames[Math.floor(Math.random() * foodNames.length)];
     const foodElement = foodMap[randomFoodType];
 

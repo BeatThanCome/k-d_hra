@@ -6,7 +6,7 @@ html {
 @font-face {
   font-family: 'Chaloops';
   color: #efc5c5;
-  src: url('fonts/Chaloops-Regular.ttf') format('truetype');
+  src: url('fonts/Chaloops-Medium.ttf') format('truetype');
 }
 
 body {
@@ -287,10 +287,11 @@ img.food {
 
 #timer {
   position: absolute;
-  top: 15%;
+  top: 12%;
+  height: 0;
   left: 25%;
   font-family: 'Chaloops', sans-serif;
   color: #efd8c5;
-  font-size:  400%;
-   -webkit-text-stroke: 2px #c4511c;
+  font-size:  10vw;
+   -webkit-text-stroke: 4px #c4511c;
 }
