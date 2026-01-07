@@ -52,7 +52,6 @@ function start(element) {
   tooltip.classList.remove('hide');
 
   // Start timer
-  timeLeft = 10;
   document.getElementById('timer').textContent = timeLeft;
   timerInterval = setInterval(() => {
     timeLeft--;
@@ -193,8 +192,12 @@ function clearFood() {
 function rankUp() {
   const stars = document.querySelectorAll('.star.transparent');
   // remove one transparent class from first star found
+      timeLeft = timeLeft + 3;
+
+      console.log('Time added! New time:', timeLeft);
+    document.getElementById('timer').textContent = timeLeft;
+
   if (stars.length > 0) {
-    timeLeft = timeLeft + 3;
     stars[0].classList.remove('transparent');
   }
 }
