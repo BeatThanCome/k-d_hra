@@ -287,10 +287,9 @@ img.food {
 
 #timer {
   position: absolute;
-  top: 2%;
-  left: 50%;
+  top: 15%;
+  left: 25%;
   font-family: 'Chaloops', sans-serif;
-  z-index: 10;
   color: #efd8c5;
   font-size:  400%;
    -webkit-text-stroke: 2px #c4511c;
