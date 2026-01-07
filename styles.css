@@ -119,6 +119,7 @@ body {
   height: 10%;
   width: 28%;
   top: 26%;
+  cursor: pointer;
 }
 
 #plate-area {
@@ -180,11 +181,13 @@ img.food {
 
 
 .close {
- display: none;
+  display: none;
 }
 
 #restart-button {
- 
+     position: absolute;
+    left: 40%;
+    top: 40%;
   width: 30%;
   cursor: pointer;
 }
@@ -194,10 +197,6 @@ img.food {
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
- 
-  justify-items: center;
-  justify-content: center;
-
 
 }
 
