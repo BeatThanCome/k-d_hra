@@ -1,93 +1,110 @@
-html{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body{
+html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-#content{
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#content {
   background-image: url('hra_background.svg');
   background-repeat: no-repeat;
-  background-size: cover; /* or contain */
+  background-size: cover;
+  /* or contain */
   position: relative;
   height: 55.3vw;
 }
+
 /* all child of content abs */
-#content > * {
+#content>* {
   position: absolute !important;
   height: inherit;
 }
 
-#animal{
+#animal {
   top: 51%;
-  left: 55%;
+  transition: left 1.5s ease-out;
   transform: translate(-50%, -50%);
   height: 30%;
 }
 
+.show-animal {
+  left: 55%;
+
+
+}
 
 .tooltip {
-    background-image: url(hra_bublina.svg);
-    background-repeat: no-repeat;
-    left: 26%;
-    transform: scale(0.3);
-    width: 100%;
-    top: -28%;
-    display: flex;
-    justify-content: center;
-    z-index: 10;
+  background-image: url(hra_bublina.svg);
+  background-repeat: no-repeat;
+  left: 26%;
+  transform: scale(0.3);
+  width: 100%;
+  top: -28%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+  transition: 1s ease-in;
 }
-.tooltip > :first-child {
-    margin-left: 17%;
-  
+
+.tooltip> :first-child {
+  margin-left: 17%;
+
 }
-.tooltip > :last-child {
-    margin-right: 29%;
-  
+
+.tooltip> :last-child {
+  margin-right: 29%;
+
 }
 
 
 .tooltip img {
   bottom: 7%;
   width: 20%;
-  margin : 1%;
+  margin: 1%;
   position: relative;
 }
-#menu{
+
+#menu {
   height: auto;
   transition: all 0.3s ease-in;
 }
-#kitchen{
-   height: auto;
+
+#kitchen {
+  height: auto;
 }
 
-#chopping-board{
+#chopping-board {
   top: 70%;
   width: 55%;
   height: 25%;
   left: 10%;
   background-image: url('hra_chopping-board.svg');
   background-repeat: no-repeat;
-  background-size: cover; /* or contain */
+  background-size: cover;
+  /* or contain */
 }
-#chopping-area{
+
+#chopping-area {
   position: relative;
   top: 25%;
   left: 45%;
   width: 50%;
   height: 55%;
 }
+
 #chopping-area img {
-  position: absolute;/* allow free placement */
+  position: absolute;
+  /* allow free placement */
   object-fit: contain;
 
 }
 
-#plate{
+#plate {
   top: 61%;
   width: 38%;
   height: 35%;
@@ -97,29 +114,35 @@ body{
   background-size: cover;
 }
 
-#start{
-    left: 43%;
-    height: 10%;
-    width: 28%;
-    top: 26%;
+#start {
+  left: 43%;
+  height: 10%;
+  width: 28%;
+  top: 26%;
 }
 
-#plate-area{
-    position: relative;
-    width: 71%;
-    height: 65%;
-    top: 27%;
-    left: 6%;
+#plate-area {
+  position: relative;
+  width: 71%;
+  height: 65%;
+  top: 27%;
+  left: 6%;
 }
+
 #plate-area img {
-  position: absolute;   /* allow free placement */
+  position: absolute;
+  /* allow free placement */
   object-fit: contain;
 }
-.hide{
-  display: none;
+
+.hide {
+  opacity: 0;
 }
 
+.hiddem-animal {
+  left: -60%;
 
+}
 
 #item-shelve {
   display: flex;
@@ -129,22 +152,53 @@ body{
   width: 13%;
   align-items: center;
 }
+
 img.food {
   padding-bottom: 15%;
   width: 10vw
 }
-.item{
- margin-top: 14%;
+
+.item {
+  margin-top: 14%;
 }
+
 .item.enlarged {
-  transform: scale(1.5); /* enlarge 1.5x */
+  transform: scale(1.5);
+  /* enlarge 1.5x */
   transition: transform 0.3s ease;
-  z-index: 10; /* so it appears above other elements */
+  z-index: 10;
+  /* so it appears above other elements */
 }
+
 #item-shelve .item:last-child {
   margin-top: auto;
   width: 111%;
   padding-left: 12%;
+}
+
+
+
+
+.close {
+ display: none;
+}
+
+#restart-button {
+ 
+  width: 30%;
+  cursor: pointer;
+}
+#hra_lost_screen {
+
+  background-image: url("hra_lost_screen.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+ 
+  justify-items: center;
+  justify-content: center;
+
+
 }
 
 .food {
@@ -160,33 +214,68 @@ img.food {
   display: flex;
   justify-content: space-between;
 }
-.stars > * {
+
+.stars>* {
   width: 29%;
-  
+
 }
+
 .transparent {
   opacity: 0.5;
 }
 
 #chopping-board img {
-  position: absolute;   /* allow free placement */
+  position: absolute;
+  /* allow free placement */
   object-fit: contain;
 }
+
 @keyframes shake {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  10% { transform: translate(-2px, -2px) rotate(-2deg); }
-  20% { transform: translate(2px, 2px) rotate(2deg); }
-  30% { transform: translate(-2px, 2px) rotate(-2deg); }
-  40% { transform: translate(2px, -2px) rotate(2deg); }
-  50% { transform: translate(-1px, 1px) rotate(-1deg); }
-  60% { transform: translate(1px, -1px) rotate(1deg); }
-  70% { transform: translate(-1px, 1px) rotate(-1deg); }
-  80% { transform: translate(1px, -1px) rotate(1deg); }
-  90% { transform: translate(-1px, 1px) rotate(-1deg); }
-  100% { transform: translate(0, 0) rotate(0deg); }
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-2px, -2px) rotate(-2deg);
+  }
+
+  20% {
+    transform: translate(2px, 2px) rotate(2deg);
+  }
+
+  30% {
+    transform: translate(-2px, 2px) rotate(-2deg);
+  }
+
+  40% {
+    transform: translate(2px, -2px) rotate(2deg);
+  }
+
+  50% {
+    transform: translate(-1px, 1px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  70% {
+    transform: translate(-1px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(-1px, 1px) rotate(-1deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
 }
 
 #chopping-board.shake {
   animation: shake 0.5s ease;
 }
-

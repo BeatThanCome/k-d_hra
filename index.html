@@ -1,28 +1,32 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>hra</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
- <div id="content">
-    <img src="hra_VYDRA.svg" id="animal" alt="vydra"  >
 
-   
-<div class="tooltip hide" id="tooltip"></div>
- <img src="hra_menu.svg"  id="menu" alt="menu"  >
-    <img src="hra_kuchyně.svg" id="kitchen" alt="Kitchen foreground"  > 
+<body>
+  <div id="content">
+    <img src="hra_VYDRA.svg" id="animal" alt="vydra" class="hiddem-animal">
+
+
+    <div class="tooltip hide" id="tooltip"></div>
+    <img src="hra_menu.svg" id="menu" alt="menu">
+    <img src="hra_kuchyně.svg" id="kitchen" alt="Kitchen foreground">
+
     <div id="chopping-board">
       <div id="chopping-area">
 
       </div>
-    </div>    
+    </div>
     <div id="item-shelve">
       <img src="hra_maso.svg" onclick="handleFoodClick(this)" class="item food" alt="hra maso" id="hraMasoImg">
       <img src="hra_ryba.svg" onclick="handleFoodClick(this)" class="item food" alt="hra ryba" id="hra_rybaImg">
-      <img src="hra_zelenina.svg" onclick="handleFoodClick(this)" class="item food" alt="hra zelenina" id="hraZeleninaImg">
+      <img src="hra_zelenina.svg" onclick="handleFoodClick(this)" class="item food" alt="hra zelenina"
+        id="hraZeleninaImg">
       <div class="stars">
         <img src="hra_star.svg" class="star" alt="star" id="star">
         <img src="hra_star.svg" class="star" alt="star" id="star">
@@ -30,21 +34,29 @@
 
       </div>
       <img src="hra_trash-can.svg" onclick="handleBinClick(this)" class="item" alt="trash can" id="trash can">
-    </div>    
+    </div>
 
-    <div id="plate">
+    <div id="plate" onclick="handlePlateClick(this)">
+
       <div id="plate-area">
 
       </div>
 
     </div>
+    <div id="hra_lost_screen" class="close">
+      <img src="hra_restart.svg" alt="restart" id="restart-button" onclick="restartGame()"
+      >
 
-    
-  <div onclick="moveOffScreen(this)" id="start"> </div>
+
+    </div>
+  </div>
+
+  <div onclick="start(this)" id="start"> </div>
 
 
 
- </div>
+  </div>
   <script src="script.js"></script>
 </body>
+
 </html>

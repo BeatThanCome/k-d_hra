@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Vrstva_1" data-name="Vrstva 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: 0em;
+      }
+
+      .cls-2 {
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+        font-size: 100px;
+      }
+
+      .cls-3 {
+        fill: #9b7e51;
+      }
+
+      .cls-4 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <rect class="cls-3" width="1920" height="1080"/>
+  <text class="cls-2" transform="translate(591 297)"><tspan x="0" y="0">p</tspan><tspan class="cls-1" x="56.9" y="0">r</tspan><tspan x="88.6" y="0">oh</tspan><tspan class="cls-4" x="199" y="0">r</tspan><tspan x="231.2" y="0">al jsi LLLLLL</tspan></text>
+</svg>

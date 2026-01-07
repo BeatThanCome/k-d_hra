@@ -4,7 +4,7 @@ const choppingBoard = document.getElementById('chopping-board');
 const plate = document.getElementById('plate-area');
 const tooltip = document.getElementById('tooltip');
 const menu = document.getElementById('menu');
-
+const animal = document.getElementById('animal');
 
 
 let clickCount = 0; // Track chopping board clicks
@@ -12,21 +12,21 @@ let clickCount = 0; // Track chopping board clicks
 const foodNames = ['Maso', 'Zelenina', 'Ryba', 'Ovoce', 'Chleb'];
 
 // Populate tooltip with 3 random food images on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const foodMap = {
     'Maso': 'hra_maso.svg',
     'Ryba': 'hra_ryba.svg',
     'Zelenina': 'hra_zelenina.svg'
 
   };
-  
 
-  
+
+
   // Generate 3 random foods (can be duplicates)
   for (let i = 0; i < 3; i++) {
     const randomFoodType = foodNames[Math.floor(Math.random() * foodNames.length)];
     const foodElement = foodMap[randomFoodType];
-    
+
     if (foodElement) {
       const img = document.createElement('img');
       img.src = foodElement;
@@ -38,53 +38,64 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-function moveOffScreen(element) {
-  menu.style.transform = '1s ease-in-out '; 
+function start(element) {
+  menu.style.transform = '1s ease-in-out ';
   menu.style.transform = 'translateY(-60%)'
 
-  element.style.display = 'none'; 
+  element.style.display = 'none';
+  moveOnScreen(animal);
+
+  tooltip.classList.remove('hide');
+
+}
+function moveOffScreen(element) {
+  element.classList.add('hiddem-animal');
+  element.classList.remove('show-animal');
+}
+function moveOnScreen(element) {
+  element.classList.remove('hiddem-animal');
+  element.classList.add('show-animal');
+}
+function handleFoodClick(event) {
+
+  enlarge(event);
+  // 2. Create a new img element
+  const newImg = document.createElement('img');
+  newImg.src = event.src;
+  newImg.alt = event.alt;
+  newImg.classList.add('food');
+  // Determine food type by ID
+  let foodType = '';
+  if (event.id.includes('Maso')) foodType = 'Maso';
+  else if (event.id.includes('ryba')) foodType = 'Ryba';
+  else if (event.id.includes('Zelenina')) foodType = 'Zelenina';
+  else if (event.id.includes('ovoce')) foodType = 'Ovoce';
+  else if (event.id.includes('chleb')) foodType = 'Chleb';
+
+  newImg.id = foodType;
+
+  const randomTop = Math.random() * 100 - 70; // 20% to 100%
+  const randomLeft = Math.random() * 100 - 20; // 20% to 100%
+
+  newImg.style.top = randomTop + '%';
+  newImg.style.left = randomLeft + '%';
+
+  choppingArea.appendChild(newImg);
+}
+function handleBinClick(event) {
+  // 1. Enlarge clicked item briefly
+  enlarge(event);
+  // 2. remove all appended items in chopping area and plate
+  const itemsInChoppingArea = choppingArea.querySelectorAll('img');
+  itemsInChoppingArea.forEach(img => img.remove());
+  const itemsInPlate = plate.querySelectorAll('img');
+  itemsInPlate.forEach(img => img.remove());
 }
 
-function handleFoodClick(event) {
-    // 1. Enlarge clicked item briefly
-    enlarge(event);
-    // 2. Create a new img element
-    const newImg = document.createElement('img');
-    newImg.src = event.src;
-    newImg.alt = event.alt;
-    newImg.classList.add('food');
-    // Determine food type by ID
-    let foodType = '';
-    if (event.id.includes('Maso')) foodType = 'Maso';
-    else if (event.id.includes('ryba')) foodType = 'Ryba';
-    else if (event.id.includes('Zelenina')) foodType = 'Zelenina';
-    else if (event.id.includes('ovoce')) foodType = 'Ovoce';
-    else if (event.id.includes('chleb')) foodType = 'Chleb';
-    
-    newImg.id = foodType;
-    
-    const randomTop = Math.random() *100 -70; // 20% to 100%
-    const randomLeft = Math.random() *100  -20; // 20% to 100%
-
-    newImg.style.top = randomTop + '%';
-    newImg.style.left = randomLeft + '%';
-
-    choppingArea.appendChild(newImg);
-  }
-  function handleBinClick(event) {
-    // 1. Enlarge clicked item briefly
-    enlarge(event);
-    // 2. remove all appended items in chopping area and plate
-    const itemsInChoppingArea = choppingArea.querySelectorAll('img');
-    itemsInChoppingArea.forEach(img => img.remove());
-    const itemsInPlate = plate.querySelectorAll('img');
-    itemsInPlate.forEach(img => img.remove());
-  }
-
-  function enlarge(event) {
-    event.classList.add('enlarged');
-    setTimeout(() => event.classList.remove('enlarged'), 300);
-  }
+function enlarge(event) {
+  event.classList.add('enlarged');
+  setTimeout(() => event.classList.remove('enlarged'), 300);
+}
 
 choppingBoard.addEventListener('click', () => {
   choppingBoard.classList.add('shake');
@@ -104,8 +115,8 @@ choppingBoard.addEventListener('click', () => {
       newImg.classList.add('food');
 
       plate.appendChild(newImg);
-      const randomTop = Math.random() *40; // 20% to 100%
-      const randomLeft = Math.random() *80; // 20% to 100%
+      const randomTop = Math.random() * 40; // 20% to 100%
+      const randomLeft = Math.random() * 80; // 20% to 100%
 
       newImg.style.top = randomTop + '%';
       newImg.style.left = randomLeft + '%';
@@ -118,16 +129,16 @@ choppingBoard.addEventListener('click', () => {
 });
 
 // Handle plate click - check if foods match speech bubble
-document.getElementById('plate').addEventListener('click', () => {
+function handlePlateClick(element) {
   const plateImages = plate.querySelectorAll('img');
   const orderedImages = tooltip.querySelectorAll('img');
 
-  
+
   if (plateImages.length === 0) return; // No food on plate
-  
+
   // Extract food names from plate images using data attribute
   const plateItems = Array.from(plateImages).map(img => img.id).filter(name => name);
-  
+
   const orderedItems = Array.from(orderedImages).map(img => img.id).filter(name => name);
 
   // Compare arrays
@@ -139,7 +150,7 @@ document.getElementById('plate').addEventListener('click', () => {
       return true;
     }
     return false;
-  
+
   });
 
   clearFood()
@@ -151,9 +162,9 @@ document.getElementById('plate').addEventListener('click', () => {
     alert('Incorrect meal. Please try again.');
     rankDown()
   }
-  
-  
-});
+
+
+}
 
 // clear all items from chopping area and plate
 function clearFood() {
@@ -178,8 +189,43 @@ function rankDown() {
   }
 }
 
+
 function resetOrderAndAnimal() {
   // Remove current order
+  tooltip.classList.add('hide');
+
+
+  setTimeout(() => {
+
+
+    newOrder();
+
+    tooltip.classList.remove('hide');
+
+
+  }, 2000);
+
+
+
+
+
+
+
+  const animalMap = {
+    'klokan': 'hra_KLOKAN.svg',
+    'vydra': 'hra_VYDRA.svg',
+    'lev': 'hra_LEV.svg',
+  };
+  moveOffScreen(animal);
+  setTimeout(() => {
+    const animalNames = Object.keys(animalMap);
+    const randomAnimal = animalNames[Math.floor(Math.random() * animalNames.length)];
+    animal.src = animalMap[randomAnimal];
+    moveOnScreen(animal);
+  }, 1000);
+
+}
+function newOrder() {
   while (tooltip.firstChild) {
     tooltip.removeChild(tooltip.firstChild);
   }
@@ -193,7 +239,7 @@ function resetOrderAndAnimal() {
     'Ovoce': null,
     'Chleb': null
   };
-  
+
   // Map food items by type
   foodItems.forEach(item => {
     if (item.id.includes('Maso')) foodMap['Maso'] = item;
@@ -202,30 +248,17 @@ function resetOrderAndAnimal() {
     else if (item.id.includes('ovoce')) foodMap['Ovoce'] = item;
     else if (item.id.includes('chleb')) foodMap['Chleb'] = item;
   });
-  
+
   // Generate 3 random foods (can be duplicates)
   for (let i = 0; i < 3; i++) {
     const randomFoodType = foodNames[Math.floor(Math.random() * foodNames.length)];
     const foodElement = foodMap[randomFoodType];
-    
+
     if (foodElement) {
       const clone = foodElement.cloneNode(true);
-      clone.classList.remove('item'); 
+      clone.classList.remove('item');
       clone.id = randomFoodType;
       tooltip.appendChild(clone);
     }
   }
-
-  // Change animal image randomly (for demonstration, we just toggle between two images)
-  const animal = document.getElementById('animal');
-    const animalMap = {
-    'klokan': 'hra_KLOKAN.svg',
-    'vydra': 'hra_VYDRA.svg',
-    'lev': 'hra_LEV.svg',
-  };
-  
-  const animalNames = Object.keys(animalMap);
-  const randomAnimal = animalNames[Math.floor(Math.random() * animalNames.length)];
-  animal.src = animalMap[randomAnimal];
-} 
-
+}
