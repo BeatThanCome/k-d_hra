@@ -278,15 +278,16 @@ function newOrder() {
   });
 
   // Generate 3 random foods (can be duplicates)
-  for (let i = 0; i < 3; i++) {
+  for (let i = 1; i < 3; i++) {
     const randomFoodType = foodNames[Math.floor(Math.random() * foodNames.length)];
     const foodElement = foodMap[randomFoodType];
 
     if (foodElement) {
-      const clone = foodElement.cloneNode(true);
-      clone.classList.remove('item');
-      clone.id = randomFoodType;
-      tooltip.appendChild(clone);
+      const img = document.createElement('img');
+      img.src = foodElement.src;
+      img.alt = randomFoodType;
+      img.id = randomFoodType;
+      tooltip.appendChild(img);
     }
   }
 }
