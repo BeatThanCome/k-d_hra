@@ -7,6 +7,9 @@ const menu = document.getElementById('menu');
 const animal = document.getElementById('animal');
 var numberOfStars = 3;
 
+var timeLeft = 20;
+let timerInterval;
+
 
 let clickCount = 0; // Track chopping board clicks
 
@@ -48,6 +51,17 @@ function start(element) {
 
   tooltip.classList.remove('hide');
 
+  // Start timer
+  timeLeft = 10;
+  document.getElementById('timer').textContent = timeLeft;
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    document.getElementById('timer').textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById('hra_lost_screen').classList.remove('close');
+    }
+  }, 1000);
 }
 function moveOffScreen(element) {
   element.classList.add('hiddem-animal');
@@ -180,6 +194,7 @@ function rankUp() {
   const stars = document.querySelectorAll('.star.transparent');
   // remove one transparent class from first star found
   if (stars.length > 0) {
+    timeLeft = timeLeft + 3;
     stars[0].classList.remove('transparent');
   }
 }
@@ -194,7 +209,7 @@ if (stars.length - 1 === 0) {
       // Show lost screen
       const lostScreen = document.getElementById('hra_lost_screen');
       lostScreen.classList.remove('close');
-
+}
 
   }
 }

@@ -47,7 +47,7 @@ body {
   top: -28%;
   display: flex;
   justify-content: center;
-  z-index: 10;
+  
   transition: 1s ease-in;
 }
 
@@ -277,4 +277,15 @@ img.food {
 
 #chopping-board.shake {
   animation: shake 0.5s ease;
+}
+
+#timer {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  color: white;
+  font-family: 'Chaloops', sans-serif;
+  z-index: 10;
 }

@@ -5,15 +5,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>hra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Chaloops&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
   <div id="content">
+    <div id="timer">10</div>
     <img src="hra_VYDRA.svg" id="animal" alt="vydra" class="hiddem-animal">
 
 
-    <div class="tooltip hide" id="tooltip"></div>
+    
     <img src="hra_menu.svg" id="menu" alt="menu">
     <img src="hra_kuchyně.svg" id="kitchen" alt="Kitchen foreground">
 
@@ -43,9 +45,14 @@
       </div>
 
     </div>
+    
+    
+    <div class="tooltip hide" id="tooltip"></div>
+
     <div onclick="start(this)" id="start"></div>
+   
     <div id="hra_lost_screen" class="close">
-      <img src="hra_restart.svg" alt="restart" id="restart-button" onclick="restartGame()">
+      <img src="hra_restart.svg" alt="restart" id="restart-button" onclick="location.reload()">
 
 
     </div>
