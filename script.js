@@ -52,7 +52,7 @@ function handleFoodClick(event) {
     const newImg = document.createElement('img');
     newImg.src = event.src;
     newImg.alt = event.alt;
-    
+    newImg.classList.add('food');
     // Determine food type by ID
     let foodType = '';
     if (event.id.includes('Maso')) foodType = 'Maso';
@@ -97,9 +97,11 @@ choppingBoard.addEventListener('click', () => {
     const items = choppingArea.querySelectorAll('img');
     items.forEach(img => {
       const newImg = document.createElement('img');
-      newImg.src = img.src;
+      //change img source to  chopped one
+      newImg.src = img.src.replace('.svg', '-nakrájená.svg');
       newImg.alt = img.alt;
       newImg.id = img.id;
+      newImg.classList.add('food');
 
       plate.appendChild(newImg);
       const randomTop = Math.random() *40; // 20% to 100%
@@ -208,8 +210,7 @@ function resetOrderAndAnimal() {
     
     if (foodElement) {
       const clone = foodElement.cloneNode(true);
-      clone.style.margin = '1%';
-      clone.style.width = 'auto';   
+      clone.classList.remove('item'); 
       clone.id = randomFoodType;
       tooltip.appendChild(clone);
     }

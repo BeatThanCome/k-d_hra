@@ -14,7 +14,7 @@ body{
   background-repeat: no-repeat;
   background-size: cover; /* or contain */
   position: relative;
-  height: 55.3vw;;
+  height: 55.3vw;
 }
 /* all child of content abs */
 #content > * {
@@ -23,7 +23,7 @@ body{
 }
 
 #animal{
-  top: 50%;
+  top: 51%;
   left: 55%;
   transform: translate(-50%, -50%);
   height: 30%;
@@ -38,10 +38,11 @@ body{
     width: 100%;
     top: -28%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    z-index: 10;
 }
 .tooltip > :first-child {
-    margin-left: 12%;
+    margin-left: 17%;
   
 }
 .tooltip > :last-child {
@@ -83,7 +84,6 @@ body{
 #chopping-area img {
   position: absolute;/* allow free placement */
   object-fit: contain;
-  height: 80%;
 
 }
 
@@ -114,7 +114,6 @@ body{
 #plate-area img {
   position: absolute;   /* allow free placement */
   object-fit: contain;
-  height: 60%;
 }
 
 #item-shelve {
@@ -123,9 +122,12 @@ body{
   gap: 1%;
   margin: 1.5% 0 0 1.5%;
   width: 13%;
-  height: 95%; /* so the flex container fills parent height */
+  align-items: center;
 }
-
+img.food {
+  padding-bottom: 15%;
+  width: 10vw
+}
 .item{
  margin-top: 14%;
 }
@@ -137,16 +139,16 @@ body{
 #item-shelve .item:last-child {
   margin-top: auto;
   width: 111%;
+  padding-left: 12%;
 }
 
 .food {
-  width: 95%;
   cursor: pointer;
 }
 
 .stars {
-  top: 2%;
-  left: 20%;
+  top: 1%;
+  left: 3.5%;
   position: relative;
   height: 5.4%;
   width: 70%;
